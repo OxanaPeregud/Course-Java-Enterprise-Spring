@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+    <aop:aspectj-autoproxy/>
+
+    <bean id="sale" class="com.peregud.dependencyinjection.domain.Sale">
+        <constructor-arg ref="independenceDayDiscount"/>
+    </bean>
+
+    <bean id="christmasDiscount" class="com.peregud.dependencyinjection.domain.ChristmasDiscount">
+        <constructor-arg ref="shopDiscount"/>
+        <constructor-arg ref="supplierDiscount"/>
+    </bean>
+
+    <bean id="shopDiscount" class="com.peregud.dependencyinjection.domain.ShopDiscount"/>
+    <bean id="supplierDiscount" class="com.peregud.dependencyinjection.domain.SupplierDiscount"/>
+
+    <bean id="easterDiscount" class="com.peregud.dependencyinjection.domain.EasterDiscount"/>
+
+    <bean id="independenceDayDiscount" class="com.peregud.dependencyinjection.domain.IndependenceDayDiscount"/>
+
+    <bean id="notifier" class="com.peregud.dependencyinjection.aspect.NotifyingAspect"/>
+
+</beans>
