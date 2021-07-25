@@ -74,6 +74,16 @@
               p:students="#{studentsList.?[averageMark gt 5].![lastName + ' ' +  firstName]}">
         </bean>
 
+        <bean id="course4" class="com.peregud.spel.model.Course"
+              p:id="4" p:name="#{'Course4'}"
+              p:students="#{T(Math).max(studentsList[0].averageMark, studentsList[1].averageMark)}">
+        </bean>
+
+        <bean id="course5" class="com.peregud.spel.model.Course"
+              p:id="5" p:name="#{'Course5'}"
+              p:students="#{T(Math).min(studentsList[2].averageMark, studentsList[4].averageMark)}">
+        </bean>
+
     </util:list>
 
 </beans>
