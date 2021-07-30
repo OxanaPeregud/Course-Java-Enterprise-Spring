@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="student" class="com.peregud.spel.model.Student" scope="prototype"/>
+
+    <util:list id="studentsList">
+
+        <bean id="student1" class="com.peregud.spel.model.Student"
+              p:id="1" p:firstName="#{'James'}" p:lastName="#{'Smith'}" p:averageMark="#{5.5}"
+              p:subjects="#{subjectsList.?[id eq 1 || id eq 2].![name]}">
+        </bean>
+
+        <bean id="student2" class="com.peregud.spel.model.Student"
+              p:id="2" p:firstName="#{'Bob'}" p:lastName="#{'White'}" p:averageMark="#{7.8}"
+              p:subjects="#{subjectsList.?[id eq 1].![name]}">
+        </bean>
+
+        <bean id="student3" class="com.peregud.spel.model.Student"
+              p:id="3" p:firstName="#{'Dan'}" p:lastName="#{'Black'}" p:averageMark="#{9.3}"
+              p:subjects="#{subjectsList.?[id eq 2 || id eq 3].![name]}">
+        </bean>
+
+        <bean id="student4" class="com.peregud.spel.model.Student"
+              p:id="4" p:firstName="#{'John'}" p:lastName="#{'Garcia'}" p:averageMark="#{4.2}"
+              p:subjects="#{subjectsList.?[id eq 1 || id eq 3].![name]}">
+        </bean>
+
+        <bean id="student5" class="com.peregud.spel.model.Student"
+              p:id="5" p:firstName="#{'Sam'}" p:lastName="#{'Brown'}" p:averageMark="#{6.3}"
+              p:subjects="#{subjectsList.?[id eq 1 || id eq 2 || id eq 3].![name]}">
+        </bean>
+
+    </util:list>
+
+    <bean id="subject" class="com.peregud.spel.model.Subject" scope="prototype"/>
+
+    <util:list id="subjectsList">
+
+        <bean id="subject1" class="com.peregud.spel.model.Subject"
+              p:id="1" p:name="#{'Java'}">
+        </bean>
+
+        <bean id="subject2" class="com.peregud.spel.model.Subject"
+              p:id="2" p:name="#{'JavaScript'}">
+        </bean>
+
+        <bean id="subject3" class="com.peregud.spel.model.Subject"
+              p:id="3" p:name="#{'C++'}">
+        </bean>
+
+    </util:list>
+
+    <util:list id="coursesList">
+
+        <bean id="course1" class="com.peregud.spel.model.Course"
+              p:id="1" p:name="#{'Course1'}"
+              p:students="#{studentsList.![lastName + ' ' +  firstName]}">
+        </bean>
+
+        <bean id="course2" class="com.peregud.spel.model.Course"
+              p:id="2" p:name="#{'Course2'}"
+              p:students="#{studentsList.?[averageMark lt 5].![lastName + ' ' +  firstName]}">
+        </bean>
+
+        <bean id="course3" class="com.peregud.spel.model.Course"
+              p:id="3" p:name="#{'Course3'}"
+              p:students="#{studentsList.?[averageMark gt 5].![lastName + ' ' +  firstName]}">
+        </bean>
+
+        <bean id="course4" class="com.peregud.spel.model.Course"
+              p:id="4" p:name="#{'Course4'}"
+              p:students="#{T(Math).max(studentsList[0].averageMark, studentsList[1].averageMark)}">
+        </bean>
+
+        <bean id="course5" class="com.peregud.spel.model.Course"
+              p:id="5" p:name="#{'Course5'}"
+              p:students="#{T(Math).min(studentsList[2].averageMark, studentsList[4].averageMark)}">
+        </bean>
+
+    </util:list>
+
+</beans>
