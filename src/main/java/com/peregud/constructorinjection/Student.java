@@ -18,4 +18,8 @@ public class Student {
     public Student(Course course) {
         this.course = course;
     }
+
+    public void displayStudents() {
+        course.displayStudents();
+    }
 }

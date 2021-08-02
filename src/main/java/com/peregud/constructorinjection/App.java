@@ -7,7 +7,7 @@ public class App {
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("constructor-injection.xml");
-        Course course = context.getBean(Course.class);
-        course.displayStudents();
+        Student student = context.getBean(Student.class);
+        student.displayStudents();
     }
 }

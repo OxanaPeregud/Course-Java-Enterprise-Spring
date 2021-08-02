@@ -15,6 +15,7 @@ public class Course {
     }
 
     public void displayStudents() {
+        System.out.println(name + ":");
         students.forEach(System.out::println);
     }
 }
